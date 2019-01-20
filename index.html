@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Face Tracker Test</title>
+		<meta charset="utf-8">
+		<script src="js/clmtrackr.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+		<body>
+			<div id="container">
+
+				<input type="file" accept="image/*" capture="user" id="file-input">
+				<label for="file-input">Take Photo of Yourself</label>
+
+				<canvas id="image"></canvas>
+				<canvas id="overlay"></canvas>
+				
+				<button id="track-button" onclick="animateClean()">See Aura</button>
+
+			</div>
+			<script>
+
+				// get dom elements
+				const trackButton = document.querySelector('#track-button');
+
+				const canvas = document.getElementById("image");
+				const context = canvas.getContext('2d');
+
+				var overlay = document.getElementById('overlay');
+				var overlayCC = overlay.getContext('2d');
+
+				// constants for visuals (int between 0 - 255)
+				// distance between eyes vs distance between nose bridge and chin
+				var para1 = 0;
+				// width of eyes vs width of nose
+				var para2 = 0;
+				// width of top of face vs width of chin
+				var para3 = 0;
+
+				//TAKE PHOTO
+				const fileInput = document.getElementById('file-input');
+
+  				fileInput.addEventListener('change', function(e){
+
+  					var img = new Image();
+					img.onload = function(){
+
+						var m = img.width / document.documentElement.clientWidth;
+						canvas.width = document.documentElement.clientWidth;
+						canvas.height = img.height / m;
+						context.drawImage(img, 0, 0, document.documentElement.clientWidth, img.height / m);
+
+						overlay.width = document.documentElement.clientWidth;
+						overlay.height = img.height / m;
+					};
+					img.src = URL.createObjectURL(e.target.files[0]);		
+
+				});
+
+				
+
+				//TRACK FACE ON PHOTO
+				var ctrack = new clm.tracker({stopOnConvergence : true});
+				ctrack.init();
+
+				var drawRequest;
+				function animateClean() {
+					ctrack.start(document.getElementById('image'));
+					drawLoop();
+				}
+				function animate(box) {
+					ctrack.start(document.getElementById('image'), box);
+					drawLoop();
+				}
+				function drawLoop() {
+					drawRequest = requestAnimFrame(drawLoop);
+					overlayCC.clearRect(0, 0, overlay.width, overlay.height);
+					if (ctrack.getCurrentPosition()) {
+						ctrack.draw(overlay);
+					}
+				}
+				// detect if tracker fails to find a face
+				document.addEventListener("clmtrackrNotFound", function(event) {
+					ctrack.stop();
+					alert("The tracking had problems with finding a face in this image. Try selecting the face in the image manually.")
+				}, false);
+				// detect if tracker loses tracking of face
+				document.addEventListener("clmtrackrLost", function(event) {
+					ctrack.stop();
+					alert("The tracking had problems converging on a face in this image. Try selecting the face in the image manually.")
+				}, false);
+				// detect if tracker has converged
+				document.addEventListener("clmtrackrConverged", function(event) {
+
+					// stop drawloop
+					cancelRequestAnimFrame(drawRequest);
+
+					//CALCULATE POINTS FOR VISUALS
+					// distance between eyes vs distance between nose bridge and chin
+					var para1_dist1 = Math.hypot(ctrack.getCurrentPosition()[27][0]-ctrack.getCurrentPosition()[32][0], ctrack.getCurrentPosition()[27][1]-ctrack.getCurrentPosition()[32][1]);
+					var para1_dist2 = Math.hypot(ctrack.getCurrentPosition()[33][0]-ctrack.getCurrentPosition()[7][0], ctrack.getCurrentPosition()[33][1]-ctrack.getCurrentPosition()[7][1]);
+					para1 = para1_dist1 / para1_dist2;
+
+					// width of eyes vs width of nose
+					var para2_dist1 = Math.hypot(ctrack.getCurrentPosition()[23][0]-ctrack.getCurrentPosition()[25][0], ctrack.getCurrentPosition()[23][1]-ctrack.getCurrentPosition()[25][1]);
+					var para2_dist2 = Math.hypot(ctrack.getCurrentPosition()[35][0]-ctrack.getCurrentPosition()[39][0], ctrack.getCurrentPosition()[35][1]-ctrack.getCurrentPosition()[39][1]);
+					para2 = para2_dist1 / para2_dist2;
+
+					// width of top of face vs width of chin
+					var para3_dist1 = Math.hypot(ctrack.getCurrentPosition()[0][0]-ctrack.getCurrentPosition()[14][0], ctrack.getCurrentPosition()[0][1]-ctrack.getCurrentPosition()[14][1]);
+					var para3_dist2 = Math.hypot(ctrack.getCurrentPosition()[5][0]-ctrack.getCurrentPosition()[9][0], ctrack.getCurrentPosition()[5][1]-ctrack.getCurrentPosition()[9][1]);
+					para3 = para3_dist1 / para3_dist2;
+
+					console.log(para1);
+					console.log(para2);
+					console.log(para3);
+					}, false);
+
+
+				window.cancelRequestAnimFrame = ( function() {
+				    return window.cancelAnimationFrame          ||
+				        window.webkitCancelRequestAnimationFrame    ||
+				        window.mozCancelRequestAnimationFrame       ||
+				        window.oCancelRequestAnimationFrame     ||
+				        window.msCancelRequestAnimationFrame        ||
+				        clearTimeout
+				} )();
+
+				window.requestAnimFrame = (function(){
+			    return  window.requestAnimationFrame       || 
+			        window.webkitRequestAnimationFrame || 
+			        window.mozRequestAnimationFrame    || 
+			        window.oRequestAnimationFrame      || 
+			        window.msRequestAnimationFrame     || 
+			        function(/* function */ callback, /* DOMElement */ element){
+			            return window.setTimeout(callback, 1000 / 60);
+			        };
+			})();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,41 @@
+#overlay, #image {
+	position: absolute;
+	top: 100px;
+	left: 0px;
+}
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
+input {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+label, button{
+					  /* default for <button>, but useful for <a> */
+	  display: inline-block;
+	  text-align: center;
+	  text-decoration: none;
+
+	  /* create a small space when buttons wrap on 2 lines */
+	  margin: 2px 0;
+
+	  /* invisible border (will be colored on hover/focus) */
+	  border: solid 1px transparent;
+	  border-radius: 4px;
+
+	  /* size comes from text & padding (no width/height) */
+	  padding: 0.5em 1em;
+
+	  /* make sure colors have enough contrast! */
+	  color: #ffffff;
+	  background-color: #9555af;
+
+	  font-family: 'Montserrat', sans-serif;
+	  font-size:50px;
+}
