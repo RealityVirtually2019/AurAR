@@ -1,142 +1,285 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<title>Face Tracker Test</title>
-		<meta charset="utf-8">
-		<script src="js/clmtrackr.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="style.css">
-	</head>
-		<body>
-			<div id="container">
 
-				<input type="file" accept="image/*" capture="user" id="file-input">
-				<label for="file-input">Take Photo of Yourself</label>
+<head>
+	<title>Face Tracker Test</title>
+	<meta charset="utf-8">
+	<script src="clmtrackr.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<!-- include A-Frame obviously -->
+	<script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+	<!-- include ar.js for A-Frame -->
+	<script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+	<script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+</head>
 
-				<canvas id="image"></canvas>
-				<canvas id="overlay"></canvas>
-				
-				<button id="track-button" onclick="animateClean()">See Aura</button>
+<body>
+	<div id="container" style=" z-index:10">
 
-			</div>
-			<script>
+		<input type="file" accept="image/*" capture="user" id="file-input">
+		<label for="file-input">Take Photo of Yourself</label>
 
-				// get dom elements
-				const trackButton = document.querySelector('#track-button');
+		<canvas id="image"></canvas>
+		<canvas id="overlay"></canvas>
 
-				const canvas = document.getElementById("image");
-				const context = canvas.getContext('2d');
+		<button id="track-button" onclick="animateClean()">See Aura</button>
+	</div>
+  
+			<a-scene  embedded arjs >
+				<!-- the bubbles -->
+				<a-sphere  position="1 1.25 -5" roughness="0.1" radius="2.25" material="color: #F16745; transparent: true; opacity: 0.8"
+				 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 1 1.25 -4.5; loop: true">
+				</a-sphere>
 
-				var overlay = document.getElementById('overlay');
-				var overlayCC = overlay.getContext('2d');
+				<a-entity position="0 0 -5">
+					<a-sphere position="0 4.2 0" radius="1.2" roughness="0.1" width-segments="52" height-segments="52" material="color: #FFC65D; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 4 0; loop: true"></a-sphere>
+				</a-entity>
 
-				// constants for visuals (int between 0 - 255)
-				// distance between eyes vs distance between nose bridge and chin
-				var para1 = 0;
-				// width of eyes vs width of nose
-				var para2 = 0;
-				// width of top of face vs width of chin
-				var para3 = 0;
+				<a-entity position="-3 0 0">
+					<a-sphere position="0 1.75 0" radius="1.75" roughness="0.1" material="color: #7BC8A4; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.55 0; loop: true"></a-sphere>
+				</a-entity>
 
-				//TAKE PHOTO
-				const fileInput = document.getElementById('file-input');
+				<a-entity position="1 1.2 0">
+					<a-sphere position="0 1 0" radius="0.1" metalness="0.1" material="color: #4CC3D9; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.2 0; loop: true"></a-sphere>
+				</a-entity>
 
-  				fileInput.addEventListener('change', function(e){
+				<a-entity position="3 0.4 1">
+					<a-sphere position="0 0.5 0" radius="0.5" roughness="0.1" material="color: #FFC65D; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 0.3 0; loop: true"></a-sphere>
+				</a-entity>
 
-  					var img = new Image();
-					img.onload = function(){
+				<a-entity position="10 1.2 -2">
+					<a-sphere position="0 5 0" radius="5" segments-width="52" segments-height="52" roughness="0.1" material="color: #93648D; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 6 0; loop: true"></a-sphere>
+				</a-entity>
 
-						var m = img.width / document.documentElement.clientWidth;
-						canvas.width = document.documentElement.clientWidth;
-						canvas.height = img.height / m;
-						context.drawImage(img, 0, 0, document.documentElement.clientWidth, img.height / m);
+				<a-entity position="-4 1.1 -4">
+					<a-sphere position="0 18 0" radius="1.2" roughness="0.1" material="color: #FFC65D; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 18.2 0; loop: true"></a-sphere>
+				</a-entity>
 
-						overlay.width = document.documentElement.clientWidth;
-						overlay.height = img.height / m;
-					};
-					img.src = URL.createObjectURL(e.target.files[0]);		
+				<a-entity position="5 0 2">
+					<a-sphere position="0 12 0" radius="2.1" roughness="0.1" material="color: #7BC8A4; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 12.2 0; loop: true"></a-sphere>
+				</a-entity>
 
-				});
+				<a-entity position="-5 2.1 5">
+					<a-sphere position="0 3 0" radius="0.3" roughness="0.1" material="color: #ECECEC; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 3.3 0; loop: true"></a-sphere>
+				</a-entity>
 
-				
+				<a-entity position="-6 0 6">
+					<a-sphere position="0 1 0" radius="2" roughness="0.1" material="color: #F16745; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.3 0; loop: true"></a-sphere>
+				</a-entity>
 
-				//TRACK FACE ON PHOTO
-				var ctrack = new clm.tracker({stopOnConvergence : true});
-				ctrack.init();
+				<a-entity position="-10 -2.3 19">
+					<a-sphere position="0 3 0" radius="3" roughness="0.1" material="color: #FFC65D; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 3.2 0; loop: true"></a-sphere>
+				</a-entity>
 
-				var drawRequest;
-				function animateClean() {
-					ctrack.start(document.getElementById('image'));
-					drawLoop();
-				}
-				function animate(box) {
-					ctrack.start(document.getElementById('image'), box);
-					drawLoop();
-				}
-				function drawLoop() {
-					drawRequest = requestAnimFrame(drawLoop);
-					overlayCC.clearRect(0, 0, overlay.width, overlay.height);
-					if (ctrack.getCurrentPosition()) {
-						ctrack.draw(overlay);
-					}
-				}
-				// detect if tracker fails to find a face
-				document.addEventListener("clmtrackrNotFound", function(event) {
-					ctrack.stop();
-					alert("The tracking had problems with finding a face in this image. Try selecting the face in the image manually.")
-				}, false);
-				// detect if tracker loses tracking of face
-				document.addEventListener("clmtrackrLost", function(event) {
-					ctrack.stop();
-					alert("The tracking had problems converging on a face in this image. Try selecting the face in the image manually.")
-				}, false);
-				// detect if tracker has converged
-				document.addEventListener("clmtrackrConverged", function(event) {
+				<a-entity position="-1 0 5">
+					<a-sphere position="0 2 0" radius="1.2" roughness="0.1" material="color: #4CC3D9; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 2.2 0; loop: true"></a-sphere>
+				</a-entity>
 
-					// stop drawloop
-					cancelRequestAnimFrame(drawRequest);
+				<a-entity position="10 -1.3 15">
+					<a-sphere position="0 4 0" radius="2" roughness="0.1" material="color: #F16745; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 3.6 0; loop: true"></a-sphere>
+				</a-entity>
 
-					//CALCULATE POINTS FOR VISUALS
-					// distance between eyes vs distance between nose bridge and chin
-					var para1_dist1 = Math.hypot(ctrack.getCurrentPosition()[27][0]-ctrack.getCurrentPosition()[32][0], ctrack.getCurrentPosition()[27][1]-ctrack.getCurrentPosition()[32][1]);
-					var para1_dist2 = Math.hypot(ctrack.getCurrentPosition()[33][0]-ctrack.getCurrentPosition()[7][0], ctrack.getCurrentPosition()[33][1]-ctrack.getCurrentPosition()[7][1]);
-					para1 = para1_dist1 / para1_dist2;
+				<a-entity position="6 -1.2 4">
+					<a-sphere position="0 1.5 0" radius="1.5" metalness="0.1" roughness="0.1" material="color: #4CC3D9; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.3 0.2; loop: true"></a-sphere>
+				</a-entity>
 
-					// width of eyes vs width of nose
-					var para2_dist1 = Math.hypot(ctrack.getCurrentPosition()[23][0]-ctrack.getCurrentPosition()[25][0], ctrack.getCurrentPosition()[23][1]-ctrack.getCurrentPosition()[25][1]);
-					var para2_dist2 = Math.hypot(ctrack.getCurrentPosition()[35][0]-ctrack.getCurrentPosition()[39][0], ctrack.getCurrentPosition()[35][1]-ctrack.getCurrentPosition()[39][1]);
-					para2 = para2_dist1 / para2_dist2;
+				<a-entity position="5 -2.1 4">
+					<a-sphere position="0 .6 0" radius="1.6" roughness="0.1" material="color: #FFC65D; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 .4 0.1; loop: true"></a-sphere>
+				</a-entity>
 
-					// width of top of face vs width of chin
-					var para3_dist1 = Math.hypot(ctrack.getCurrentPosition()[0][0]-ctrack.getCurrentPosition()[14][0], ctrack.getCurrentPosition()[0][1]-ctrack.getCurrentPosition()[14][1]);
-					var para3_dist2 = Math.hypot(ctrack.getCurrentPosition()[5][0]-ctrack.getCurrentPosition()[9][0], ctrack.getCurrentPosition()[5][1]-ctrack.getCurrentPosition()[9][1]);
-					para3 = para3_dist1 / para3_dist2;
+				<a-entity position="5 1.3 25">
+					<a-sphere position="0 2 0" radius="4.2" roughness="0.1" material="color: #93648D; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 2.3 0; loop: true"></a-sphere>
+				</a-entity>
 
-					console.log(para1);
-					console.log(para2);
-					console.log(para3);
-					}, false);
+				<a-entity position="2 1.9 15">
+					<a-sphere position="0 0.2 0" radius="4.2" roughness="0.1" material="color: #ECECEC; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 0.4 0; loop: true"></a-sphere>
+				</a-entity>
+
+				<a-entity position="4 -2 10">
+					<a-sphere position="0 0.15 0" radius="0.15" roughness="0.1" material="color: #93648D; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 0.35 0; loop: true"></a-sphere>
+				</a-entity>
 
 
-				window.cancelRequestAnimFrame = ( function() {
-				    return window.cancelAnimationFrame          ||
-				        window.webkitCancelRequestAnimationFrame    ||
-				        window.mozCancelRequestAnimationFrame       ||
-				        window.oCancelRequestAnimationFrame     ||
-				        window.msCancelRequestAnimationFrame        ||
-				        clearTimeout
-				} )();
+				<a-sphere position="1 1.25 -5" roughness="0.1" radius="2.25" material="color: #F16745; transparent: true; opacity: 0.8"
+				 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 1 1.25 -4.5; loop: true">
+				</a-sphere>
 
-				window.requestAnimFrame = (function(){
-			    return  window.requestAnimationFrame       || 
-			        window.webkitRequestAnimationFrame || 
-			        window.mozRequestAnimationFrame    || 
-			        window.oRequestAnimationFrame      || 
-			        window.msRequestAnimationFrame     || 
-			        function(/* function */ callback, /* DOMElement */ element){
-			            return window.setTimeout(callback, 1000 / 60);
-			        };
-			})();
-		</script>
-	</body>
+				<a-entity position="0 1.4 -5">
+					<a-sphere position="0 4.2 0" radius="1.2" roughness="0.1" width-segments="52" height-segments="52" material="color: #ECECEC; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 4 0; loop: true"></a-sphere>
+				</a-entity>
+
+				<a-entity position="-3 -1.4 0">
+					<a-sphere position="0 1.75 0" radius="0.75" roughness="0.1" material="color: #4CC3D9; transparent: true; opacity: 0.8"
+					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.55 0; loop: true"></a-sphere>
+				</a-entity>
+
+				<a-entity animation="property: rotation; to: 0 0 360; dur: 4000; easing: linear; loop: true">
+					<a-entity mixin="light" position="30 0 0"></a-entity>
+				</a-entity>
+
+				<!-- the lighting -->
+				<a-entity animation="property: rotation; to: 360 0 0; dur: 4000; easing: linear; loop: true">
+					<a-entity mixin="light" position="0 0 40"></a-entity>
+				</a-entity>
+			</a-scene>
+
+	<script>
+
+		// get dom elements
+		const trackButton = document.querySelector('#track-button');
+
+		const canvas = document.getElementById("image");
+		const context = canvas.getContext('2d');
+
+		var overlay = document.getElementById('overlay');
+		var overlayCC = overlay.getContext('2d');
+
+		// constants for visuals (int between 0 - 255)
+		// distance between eyes vs distance between nose bridge and chin
+		var para1 = 0;
+		// width of eyes vs width of nose
+		var para2 = 0;
+		// width of top of face vs width of chin
+		var para3 = 0;
+
+		//TAKE PHOTO
+		const fileInput = document.getElementById('file-input');
+
+		fileInput.addEventListener('change', function (e) {
+
+			var img = new Image();
+			img.onload = function () {
+
+				var m = img.width / document.documentElement.clientWidth;
+				canvas.width = document.documentElement.clientWidth;
+				canvas.height = img.height / m;
+				context.drawImage(img, 0, 0, document.documentElement.clientWidth, img.height / m);
+
+				overlay.width = document.documentElement.clientWidth;
+				overlay.height = img.height / m;
+			};
+			img.src = URL.createObjectURL(e.target.files[0]);
+
+		});
+
+
+
+		//TRACK FACE ON PHOTO
+		var ctrack = new clm.tracker({
+			stopOnConvergence: true
+		});
+		ctrack.init();
+
+		var drawRequest;
+
+		function animateClean() {
+			ctrack.start(document.getElementById('image'));
+			drawLoop();
+      var x = document.getElementById("container");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+		}
+
+		function animate(box) {
+			ctrack.start(document.getElementById('image'), box);
+			drawLoop();
+		}
+
+		function drawLoop() {
+			drawRequest = requestAnimFrame(drawLoop);
+			overlayCC.clearRect(0, 0, overlay.width, overlay.height);
+			if (ctrack.getCurrentPosition()) {
+				ctrack.draw(overlay);
+			}
+		}
+		// detect if tracker fails to find a face
+		document.addEventListener("clmtrackrNotFound", function (event) {
+			ctrack.stop();
+			alert("The tracking had problems with finding a face in this image. Try selecting the face in the image manually.")
+		}, false);
+		// detect if tracker loses tracking of face
+		document.addEventListener("clmtrackrLost", function (event) {
+			ctrack.stop();
+			alert(
+				"The tracking had problems converging on a face in this image. Try selecting the face in the image manually.")
+		}, false);
+		// detect if tracker has converged
+		document.addEventListener("clmtrackrConverged", function (event) {
+
+			// stop drawloop
+			cancelRequestAnimFrame(drawRequest);
+
+			//CALCULATE POINTS FOR VISUALS
+			// distance between eyes vs distance between nose bridge and chin
+			var para1_dist1 = Math.hypot(ctrack.getCurrentPosition()[27][0] - ctrack.getCurrentPosition()[32][0], ctrack.getCurrentPosition()[
+				27][1] - ctrack.getCurrentPosition()[32][1]);
+			var para1_dist2 = Math.hypot(ctrack.getCurrentPosition()[33][0] - ctrack.getCurrentPosition()[7][0], ctrack.getCurrentPosition()[
+				33][1] - ctrack.getCurrentPosition()[7][1]);
+			para1 = para1_dist1 / para1_dist2;
+
+			// width of eyes vs width of nose
+			var para2_dist1 = Math.hypot(ctrack.getCurrentPosition()[23][0] - ctrack.getCurrentPosition()[25][0], ctrack.getCurrentPosition()[
+				23][1] - ctrack.getCurrentPosition()[25][1]);
+			var para2_dist2 = Math.hypot(ctrack.getCurrentPosition()[35][0] - ctrack.getCurrentPosition()[39][0], ctrack.getCurrentPosition()[
+				35][1] - ctrack.getCurrentPosition()[39][1]);
+			para2 = para2_dist1 / para2_dist2;
+
+			// width of top of face vs width of chin
+			var para3_dist1 = Math.hypot(ctrack.getCurrentPosition()[0][0] - ctrack.getCurrentPosition()[14][0], ctrack.getCurrentPosition()[
+				0][1] - ctrack.getCurrentPosition()[14][1]);
+			var para3_dist2 = Math.hypot(ctrack.getCurrentPosition()[5][0] - ctrack.getCurrentPosition()[9][0], ctrack.getCurrentPosition()[
+				5][1] - ctrack.getCurrentPosition()[9][1]);
+			para3 = para3_dist1 / para3_dist2;
+
+			console.log(para1);
+			console.log(para2);
+			console.log(para3);
+		}, false);
+
+
+		window.cancelRequestAnimFrame = (function () {
+			return window.cancelAnimationFrame ||
+				window.webkitCancelRequestAnimationFrame ||
+				window.mozCancelRequestAnimationFrame ||
+				window.oCancelRequestAnimationFrame ||
+				window.msCancelRequestAnimationFrame ||
+				clearTimeout
+		})();
+
+		window.requestAnimFrame = (function () {
+			return window.requestAnimationFrame ||
+				window.webkitRequestAnimationFrame ||
+				window.mozRequestAnimationFrame ||
+				window.oRequestAnimationFrame ||
+				window.msRequestAnimationFrame ||
+				function ( /* function */ callback, /* DOMElement */ element) {
+					return window.setTimeout(callback, 1000 / 60);
+				};
+		})();
+	</script>
+</body>
+
 </html>
