@@ -12,7 +12,7 @@
 	<!-- include ar.js for A-Frame -->
 	<script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
 	<script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -26,125 +26,124 @@
 
 		<button id="track-button" onclick="animateClean()">See Aura</button>
 	</div>
-  
-			<a-scene  embedded arjs >
-				<!-- the bubbles -->
-				<a-sphere  position="1 1.25 -5" roughness="0.1" radius="2.25" material="color: #F16745; transparent: true; opacity: 0.8"
-				 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 1 1.25 -4.5; loop: true">
-				</a-sphere>
 
-				<a-entity position="0 0 -5">
-					<a-sphere position="0 4.2 0" radius="1.2" roughness="0.1" width-segments="52" height-segments="52" material="color: #FFC65D; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 4 0; loop: true"></a-sphere>
-				</a-entity>
+	<a-scene embedded arjs>
+		<!-- the bubbles -->
+		<a-sphere position="1 1.25 -5" roughness="0.1" radius="2.25" material="color: #F16745; transparent: true; opacity: 0.8"
+		 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 1 1.25 -4.5; loop: true">
+		</a-sphere>
 
-				<a-entity position="-3 0 0">
-					<a-sphere position="0 1.75 0" radius="1.75" roughness="0.1" material="color: #7BC8A4; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.55 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="0 0 -5">
+			<a-sphere position="0 4.2 0" radius="1.2" roughness="0.1" width-segments="52" height-segments="52" material="color: #FFC65D; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 4 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="1 1.2 0">
-					<a-sphere position="0 1 0" radius="0.1" metalness="0.1" material="color: #4CC3D9; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.2 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="-3 0 0">
+			<a-sphere position="0 1.75 0" radius="1.75" roughness="0.1" material="color: #7BC8A4; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.55 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="3 0.4 1">
-					<a-sphere position="0 0.5 0" radius="0.5" roughness="0.1" material="color: #FFC65D; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 0.3 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="1 1.2 0">
+			<a-sphere position="0 1 0" radius="0.1" metalness="0.1" material="color: #4CC3D9; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.2 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="10 1.2 -2">
-					<a-sphere position="0 5 0" radius="5" segments-width="52" segments-height="52" roughness="0.1" material="color: #93648D; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 6 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="3 0.4 1">
+			<a-sphere position="0 0.5 0" radius="0.5" roughness="0.1" material="color: #FFC65D; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 0.3 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="-4 1.1 -4">
-					<a-sphere position="0 18 0" radius="1.2" roughness="0.1" material="color: #FFC65D; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 18.2 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="10 1.2 -2">
+			<a-sphere position="0 5 0" radius="5" segments-width="52" segments-height="52" roughness="0.1" material="color: #93648D; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 6 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="5 0 2">
-					<a-sphere position="0 12 0" radius="2.1" roughness="0.1" material="color: #7BC8A4; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 12.2 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="-4 1.1 -4">
+			<a-sphere position="0 18 0" radius="1.2" roughness="0.1" material="color: #FFC65D; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 18.2 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="-5 2.1 5">
-					<a-sphere position="0 3 0" radius="0.3" roughness="0.1" material="color: #ECECEC; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 3.3 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="5 0 2">
+			<a-sphere position="0 12 0" radius="2.1" roughness="0.1" material="color: #7BC8A4; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 12.2 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="-6 0 6">
-					<a-sphere position="0 1 0" radius="2" roughness="0.1" material="color: #F16745; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.3 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="-5 2.1 5">
+			<a-sphere position="0 3 0" radius="0.3" roughness="0.1" material="color: #ECECEC; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 3.3 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="-10 -2.3 19">
-					<a-sphere position="0 3 0" radius="3" roughness="0.1" material="color: #FFC65D; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 3.2 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="-6 0 6">
+			<a-sphere position="0 1 0" radius="2" roughness="0.1" material="color: #F16745; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.3 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="-1 0 5">
-					<a-sphere position="0 2 0" radius="1.2" roughness="0.1" material="color: #4CC3D9; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 2.2 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="-10 -2.3 19">
+			<a-sphere position="0 3 0" radius="3" roughness="0.1" material="color: #FFC65D; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 3.2 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="10 -1.3 15">
-					<a-sphere position="0 4 0" radius="2" roughness="0.1" material="color: #F16745; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 3.6 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="-1 0 5">
+			<a-sphere position="0 2 0" radius="1.2" roughness="0.1" material="color: #4CC3D9; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 2.2 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="6 -1.2 4">
-					<a-sphere position="0 1.5 0" radius="1.5" metalness="0.1" roughness="0.1" material="color: #4CC3D9; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.3 0.2; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="10 -1.3 15">
+			<a-sphere position="0 4 0" radius="2" roughness="0.1" material="color: #F16745; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 3.6 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="5 -2.1 4">
-					<a-sphere position="0 .6 0" radius="1.6" roughness="0.1" material="color: #FFC65D; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 .4 0.1; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="6 -1.2 4">
+			<a-sphere position="0 1.5 0" radius="1.5" metalness="0.1" roughness="0.1" material="color: #4CC3D9; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.3 0.2; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="5 1.3 25">
-					<a-sphere position="0 2 0" radius="4.2" roughness="0.1" material="color: #93648D; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 2.3 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="5 -2.1 4">
+			<a-sphere position="0 .6 0" radius="1.6" roughness="0.1" material="color: #FFC65D; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 .4 0.1; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="2 1.9 15">
-					<a-sphere position="0 0.2 0" radius="4.2" roughness="0.1" material="color: #ECECEC; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 0.4 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="5 1.3 25">
+			<a-sphere position="0 2 0" radius="4.2" roughness="0.1" material="color: #93648D; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 2.3 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="4 -2 10">
-					<a-sphere position="0 0.15 0" radius="0.15" roughness="0.1" material="color: #93648D; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 0.35 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="2 1.9 15">
+			<a-sphere position="0 0.2 0" radius="4.2" roughness="0.1" material="color: #ECECEC; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 0.4 0; loop: true"></a-sphere>
+		</a-entity>
+
+		<a-entity position="4 -2 10">
+			<a-sphere position="0 0.15 0" radius="0.15" roughness="0.1" material="color: #93648D; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 0.35 0; loop: true"></a-sphere>
+		</a-entity>
 
 
-				<a-sphere position="1 1.25 -5" roughness="0.1" radius="2.25" material="color: #F16745; transparent: true; opacity: 0.8"
-				 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 1 1.25 -4.5; loop: true">
-				</a-sphere>
+		<a-sphere position="1 1.25 -5" roughness="0.1" radius="2.25" material="color: #F16745; transparent: true; opacity: 0.8"
+		 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 1 1.25 -4.5; loop: true">
+		</a-sphere>
 
-				<a-entity position="0 1.4 -5">
-					<a-sphere position="0 4.2 0" radius="1.2" roughness="0.1" width-segments="52" height-segments="52" material="color: #ECECEC; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 4 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="0 1.4 -5">
+			<a-sphere position="0 4.2 0" radius="1.2" roughness="0.1" width-segments="52" height-segments="52" material="color: #ECECEC; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 4 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity position="-3 -1.4 0">
-					<a-sphere position="0 1.75 0" radius="0.75" roughness="0.1" material="color: #4CC3D9; transparent: true; opacity: 0.8"
-					 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.55 0; loop: true"></a-sphere>
-				</a-entity>
+		<a-entity position="-3 -1.4 0">
+			<a-sphere position="0 1.75 0" radius="0.75" roughness="0.1" material="color: #4CC3D9; transparent: true; opacity: 0.8"
+			 shadow animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 1.55 0; loop: true"></a-sphere>
+		</a-entity>
 
-				<a-entity animation="property: rotation; to: 0 0 360; dur: 4000; easing: linear; loop: true">
-					<a-entity mixin="light" position="30 0 0"></a-entity>
-				</a-entity>
+		<a-entity animation="property: rotation; to: 0 0 360; dur: 4000; easing: linear; loop: true">
+			<a-entity mixin="light" position="30 0 0"></a-entity>
+		</a-entity>
 
-				<!-- the lighting -->
-				<a-entity animation="property: rotation; to: 360 0 0; dur: 4000; easing: linear; loop: true">
-					<a-entity mixin="light" position="0 0 40"></a-entity>
-				</a-entity>
-			</a-scene>
+		<!-- the lighting -->
+		<a-entity animation="property: rotation; to: 360 0 0; dur: 4000; easing: linear; loop: true">
+			<a-entity mixin="light" position="0 0 40"></a-entity>
+		</a-entity>
+	</a-scene>
 
 	<script>
-
 		// get dom elements
 		const trackButton = document.querySelector('#track-button');
 
@@ -195,12 +194,12 @@
 		function animateClean() {
 			ctrack.start(document.getElementById('image'));
 			drawLoop();
-      var x = document.getElementById("container");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
+			var x = document.getElementById("container");
+			if (x.style.display === "none") {
+				x.style.display = "block";
+			} else {
+				x.style.display = "none";
+			}
 		}
 
 		function animate(box) {
